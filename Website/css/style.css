@@ -1,0 +1,96 @@
+*{margin: 0; padding: 0; font-family: "宋体";}
+.login{
+	width: 100%;
+	height: 100%;
+	background: url(../src/images/login_bg.png) center center;
+	min-width: 1200px;
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+}
+.login_form{
+	width: 100%;
+	min-width: 1200px;
+	padding-top: 344px;
+	border-radius: 5px;
+}
+.form{
+	margin: 0 auto;
+	width: 450px;
+	background: rgba(255,255,255,0.5);
+	padding: 10px;
+}
+.login_con{
+	width: 450px;
+	background: #FFFFFF;
+	padding-bottom: 20px;
+}
+.welcome{
+	font-size: 24px;
+	line-height: 32px;
+	color: #666666;
+	margin-left: 40px;
+}
+.form input{
+	margin-left: 40px;
+	padding-left: 30px;
+	border-radius: 5px;
+}
+.form img{
+	position: absolute;
+	margin-top: 35px;
+	margin-left: 50px;
+}
+.same{
+	width: 360px;
+	height: 50px;
+	margin-top: 20px;
+}
+.yanzhengma{
+	margin-top: 20px;
+	width: 250px;
+	height: 50px;
+	border: 1px solid rgb(178,178,178);
+}
+.yanzhengma1{
+	float: right;
+}
+.username{
+	border: 1px solid rgb(178,178,178);
+}
+.password{
+	border: 1px solid rgb(178,178,178);
+}
+.remember{
+	margin-top: 20px;
+}
+button{
+	width: 170px;
+	height: 40px;
+	border: none;
+	border-radius: 5px;
+	color: #FFFFFF;
+	cursor: pointer;
+}
+.btn{
+	margin-top: 30px;
+	margin-left: 40px;
+}
+.denglu{
+	background: #d0201e;
+}
+.zhuce{
+	margin-left: 20px;
+	background: #d9d9d9;
+}
+.footer{
+	margin: 0 auto;
+	left: 40%;
+	bottom: 2%;
+	position: absolute;
+}
+.footer a{
+	margin: 0 auto;
+	color: #FFFFFF;
+	font-size: 14px;
+	text-decoration: none;
+}

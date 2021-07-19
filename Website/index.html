@@ -27,20 +27,24 @@
         }
         /* 鼠标位置控件层样式设置 */
         #mouse-position {
-            float: right;
             position: absolute;
-            bottom: 5px;
+            bottom: 50px;
+            right:50px;
             width: 200px;
             height: 20px;
             /*在地图容器中的层，要设置z-index的值让其显示在地图上层*/
-            z-index: 2000;
+            z-index: 9999;
         }
         /* 鼠标位置信息自定义样式设置 */
         .custom-mouse-position {
             color: rgb(0,0,0);
             font-size: 16px;
             font-family: "微软雅黑";
+        
         }
+        
+        
+        
     </style>
 </head>
 <body>
@@ -49,25 +53,25 @@
 
     <div id="inputBox">
         <div class="layui-form-item" style="position:absolute;right:330px;top:350px;">
-            <label class="layui-form-label" style="color:#0000FF;font-size:large">信息</label>
+            <label class="layui-form-label" style="color:black;font-size:large">信息</label>
             <div class="layui-input-block" width="200px">
                 <input type="text" id="address_input" placeholder="请输入信息" class="layui-input" />
             </div>
         </div>
         <div class="layui-form-item" style="position:absolute;right:30px;top:350px">
-            <label class="layui-form-label" style="color:#0000FF;font-size:large">名称</label>
+            <label class="layui-form-label" style="color:black;font-size:large">名称</label>
             <div class="layui-input-block" width="200px">
                 <input type="text" id="name_input" placeholder="请输入名称" class="layui-input" />
             </div>
         </div>
         <div class="layui-form-item" style="position:absolute;right:330px;top:400px">
-            <label class="layui-form-label" style="color:#0000FF;font-size:large">经度</label>
+            <label class="layui-form-label" style="color:black;font-size:large">经度</label>
             <div class="layui-input-block">
                 <input type="text" id="lon_input" placeholder="请输入经度" class="layui-input" />
             </div>
         </div>
         <div class="layui-form-item" style="position:absolute;right:30px;top:400px">
-            <label class="layui-form-label" style="color:#0000FF;font-size:large">纬度</label>
+            <label class="layui-form-label" style="color:black;font-size:large">纬度</label>
             <div class="layui-input-block">
                 <input type="text" id="lat_input" placeholder="请输入纬度" class="layui-input" />
             </div>
@@ -82,9 +86,12 @@
 
     </div>
 
-    <div style="position:absolute;right:0px;top:0px;">
-        <table id="dataTable" class="layui-table" lay-filter="test"></table>
+    <div id="table">
+        <div style="position:absolute;right:0px;top:40px;z-index:9999">
+            <table id="dataTable" class="layui-table" lay-filter="test"></table>
+        </div>
     </div>
+    
 
     <script type="text/javascript">
         //实例化鼠标位置控件
@@ -158,7 +165,7 @@
 
         json = null; //json里面的数据
         //读取Json文件
-        var url = "../json/table/university.json"/*json文件url，本地的就写本地的位置，如果是服务器的就写服务器的路径*/
+        var url = "../json/table/temp.json"/*json文件url，本地的就写本地的位置，如果是服务器的就写服务器的路径*/
         var request = new XMLHttpRequest();
         request.open("get", url);/*设置请求方法与路径*/
         request.send(null);/*不发送数据到服务器*/
@@ -225,8 +232,8 @@
                     elem: '#dataTable'
                     , width: 600
                     , height: 300
-                    , url: '../json/table/university.json'
-                    , title: '武汉市高校一览'
+                    , url: '../json/table/temp.json'
+                    , title: '红色景点相关信息'
                     , data: viewObj.tbData  //数据类
                     , page: false //开启分页
                     , limit: 10
@@ -593,8 +600,8 @@
 
     <div class="layui-btn-container">
 
-        <button id="showBox" type="button" class="layui-btn" style="position: absolute; top: 60px; left: 1450px;z-index:9999"><i class="layui-icon"></i></button>
-        <button id="hideBox" type="button" class="layui-btn" style="position: absolute; top: 60px; left: 1550px;z-index:9999"><i class="layui-icon"></i></button>
+        <button id="showBox" type="button" class="layui-btn" style="position: absolute; top: 10px; left: 1200px;z-index:9999"><i class="layui-icon"></i></button>
+        <button id="hideBox" type="button" class="layui-btn" style="position: absolute; top: 10px; left: 1300px;z-index:9999"><i class="layui-icon"></i></button>
 
     </div>
 
@@ -608,13 +615,16 @@
             } else {
                 div.style.display = ""; }*/
         var hButton = document.getElementById("hideBox");
-        var table = document.getElementById("inputBox");
+        var box = document.getElementById("inputBox");
+        //var table = $("#dataTable").get(0);
+        var table = document.getElementById("table");
         var sButton = document.getElementById("showBox");
         hButton.onclick = function () {
-            if (table.style.visibility = "visible") {
+            if (box.style.visibility = "visible") {
                 //table.display = "none"
                 table.style.visibility = "hidden"
-                alert("隐藏输入栏")
+                box.style.visibility="hidden"
+                alert("隐藏表单")
 
             }
             else {
@@ -622,64 +632,32 @@
             }
         }
         sButton.onclick = function () {
-            if (table.style.visibility = "hidden") {
+            if (box.style.visibility = "hidden") {
                 //table.display = "none"
-                table.style.visibility = "visible"
-                alert("显示输入栏")
+                table.style.visibility="visible"
+                box.style.visibility="visible"
+                alert("显示表单")
 
             }
             else {
                 //table.style.display = "block"
             }
         }
-
-            < script src = "//res.layui.com/layui/dist/layui.js?t=1626365851605" ></script>
-    <script>
-        layui.config({
-            version: '1626365851605' //为了更新 js 缓存，可忽略
-        });
-
-//加载模块
-layui.use(function () { //亦可加载特定模块：layui.use(['layer', 'laydate', function(){
-    //得到各种内置组件
-    var layer = layui.layer //弹层
-        , laypage = layui.laypage //分页
-        , laydate = layui.laydate //日期
-        , table = layui.table //表格
-        , carousel = layui.carousel //轮播
-        , upload = layui.upload //上传
-        , element = layui.element //元素操作
-        , slider = layui.slider //滑块
-        , dropdown = layui.dropdown //下拉菜单
-
-    //向世界问个好
-    layer.msg('Hello World');
-
-    //监听Tab切换
-    element.on('tab(demo)', function (data) {
-        layer.tips('切换了 ' + data.index + '：' + this.innerHTML, this, {
-            tips: 1
-        });
-    });
-    //底部信息
-    var footerTpl = lay('#footer')[0].innerHTML;
-    lay('#footer').html(layui.laytpl(footerTpl).render({}))
-        .removeClass('layui-hide');
-    });
-    </script>
+      
+    </script> 
 
 
 
     <!--导航测试-->
 
-    <ul class="layui-nav" style="margin-top: -100px;z-index:9999">
-        <li class="layui-nav-item layui-this"><a href="">选中</a></li>
+    <ul class="layui-nav" style="margin-top: -100px;z-index:9998">
+        <li class="layui-nav-item layui-this"><a href="">首页</a></li>
         <li class="layui-nav-item">
-            <a href="javascript:;">常规</a>
+            <a href="javascript:;">新闻</a>
         </li>
-        <li class="layui-nav-item"><a href="">导航</a></li>
+        <li class="layui-nav-item"><a href="">党建</a></li>
         <li class="layui-nav-item">
-            <a href="javascript:;">子级</a>
+            <a href="javascript:;">长征</a>
             <dl class="layui-nav-child">
                 <dd><a href="">菜单1</a></dd>
                 <dd><a href="">菜单2</a></dd>
@@ -687,37 +665,37 @@ layui.use(function () { //亦可加载特定模块：layui.use(['layer', 'laydat
             </dl>
         </li>
         <li class="layui-nav-item">
-            <a href="javascript:;">选项</a>
+            <a href="javascript:;">地图分析</a>
             <dl class="layui-nav-child">
                 <dd><a href="">选项1</a></dd>
                 <dd class="layui-this"><a href="">选项2</a></dd>
                 <dd><a href="">选项3</a></dd>
             </dl>
         </li>
-        <li class="layui-nav-item"><a href="">演示</a></li>
+        <li class="layui-nav-item"><a href="">帮助</a></li>
     </ul>
 
 
     <ul class="layui-nav layui-nav-tree layui-inline" lay-filter="demo" style="margin-right: 0px;z-index:9999">
         <li class="layui-nav-item layui-nav-itemed">
-            <a href="javascript:;">默认展开</a>
+            <a href="javascript:;">基础功能</a>
             <dl class="layui-nav-child">
                 <dd><a href="javascript:;">选项一</a></dd>
                 <dd><a href="javascript:;">选项二</a></dd>
                 <dd><a href="javascript:;">选项三</a></dd>
-                <dd><a href="">跳转项</a></dd>
+                <dd><a href="javascript:;">选项四</a></dd>
             </dl>
         </li>
         <li class="layui-nav-item">
-            <a href="javascript:;">解决方案</a>
+            <a href="javascript:;">高级功能</a>
             <dl class="layui-nav-child">
-                <dd><a href="">移动模块</a></dd>
-                <dd><a href="">后台模版</a></dd>
-                <dd><a href="">电商平台</a></dd>
+                <dd><a href="">选项一</a></dd>
+                <dd><a href="">选项二</a></dd>
+                <dd><a href="">选项三</a></dd>
             </dl>
         </li>
-        <li class="layui-nav-item"><a href="">云市场</a></li>
-        <li class="layui-nav-item"><a href="">社区</a></li>
+        <li class="layui-nav-item"><a href="">地图导出</a></li>
+        <li class="layui-nav-item"><a href="dizhi.html">要素查询</a></li>
     </ul>
 
     <h3 style="font:400px;color:red;position:absolute;bottom:10px;left:100px">友情链接:</h3>
