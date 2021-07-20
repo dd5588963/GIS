@@ -795,6 +795,7 @@
 
         function deleteDraw() {
             source = null;
+            map.removeInteraction(draw);
             //清空绘制图形
             vector.setSource(source);
         }
