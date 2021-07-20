@@ -680,10 +680,17 @@
         <li class="layui-nav-item layui-nav-itemed">
             <a href="javascript:;">基础功能</a>
             <dl class="layui-nav-child">
-                <dd><a href="javascript:;">选项一</a></dd>
-                <dd><a href="javascript:;">选项二</a></dd>
-                <dd><a href="javascript:;">选项三</a></dd>
-                <dd><a href="javascript:;">选项四</a></dd>
+                <dd><a href="javascript:addpoint();">添加点</a></dd>
+                <dd><a href="javascript:addLine();">添加线</a></dd>
+                <dd><a href="javascript:addshape();">添加图形</a>
+                    <select id="type">
+                        <option value="None">无</option>
+                        <option value="LineString" selected="selected">线</option>
+                        <option value="Polygon">区</option>
+                        <option value="Circle">圆</option>
+                    </select>
+                </dd>
+                <dd><a href="javascript:deleteDraw();">清空所有绘制图形</a></dd>
             </dl>
         </li>
         <li class="layui-nav-item">
@@ -720,6 +727,79 @@
                 layer.msg(elem.text());
             });
         });
+    </script>
+        
+    <script>
+        var typeSelect = document.getElementById('type');
+        var draw;
+        var source = new ol.source.Vector({ wrapX: false });
+        var vector = new ol.layer.Vector({
+            source: source,
+            style: new ol.style.Style({
+                fill: new ol.style.Fill({
+                    color: 'rgba(0,0,0, 0.2)'
+                }),
+                stroke: new ol.style.Stroke({
+                    color: '#000000',
+                    width: 2
+                }),
+                image: new ol.style.Circle({
+                    radius: 7,
+                    fill: new ol.style.Fill({
+                        color: '#000000'
+                    })
+                })
+            })
+        });
+        map.addLayer(vector);
+        function addInteraction(_type) {
+            if (source == null) {
+                source = new ol.source.Vector({ wrapX: false });
+                //添加绘制层数据源
+                vector.setSource(source);
+            }
+            draw = new ol.interaction.Draw({
+                //绘制层数据源
+                source: source,
+                /** @type {ol.geom.GeometryType}几何图形类型 */
+                type: _type,
+
+            });
+            map.addInteraction(draw);
+        }
+
+        function addpoint() {
+            map.removeInteraction(draw);
+            addInteraction('Point');
+        }
+        function addLine() {
+            map.removeInteraction(draw);
+            addInteraction('LineString');
+        }
+       
+        function addshape() {
+            map.removeInteraction(draw);
+            if (source == null) {
+                source = new ol.source.Vector({ wrapX: false });
+                //添加绘制层数据源
+                vector.setSource(source);
+            }
+            draw = new ol.interaction.Draw({
+                source: source,
+                /** @type {ol.geom.GeometryType}几何图形类型 */
+                type: (typeSelect.value),
+                freehand: true
+            });
+            map.addInteraction(draw);
+        }
+
+        function deleteDraw() {
+            source = null;
+            //清空绘制图形
+            vector.setSource(source);
+        }
+        
+
     </script>
 
 
