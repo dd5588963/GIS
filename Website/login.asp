@@ -14,7 +14,6 @@
 		<div class="login">
 			<div class="login_form">
 				<div class="form">
-					<div class="login_con" action="test.asp" method="post">
 						<span class="welcome">欢迎登陆</span>
 						<br />
 						<img src="src/images/user.png" class="user" />
@@ -31,12 +30,12 @@
 						</div>
 					</div>
 				</div>
-				</div>
 			</div>
-			<div class="footer">
-				<a href="#">版权所有：cugsoft </a>&nbsp;
-				<a href="#">技术支持：luxury</a>
-			</div>
+
+		<div class="footer">
+			<a href="#">版权所有：cugsoft </a>&nbsp;
+			<a href="#">技术支持：luxury</a>
+		</div>
 		
 
 		<script>

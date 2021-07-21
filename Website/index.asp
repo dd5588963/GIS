@@ -115,7 +115,8 @@
             title: "高德地图",
             source: new ol.source.XYZ({
                 url: 'http://wprd0{1-4}.is.autonavi.com/appmaptile?lang=zh_cn&size=1&style=7&x={x}&y={y}&z={z}',
-                wrapX: false
+                wrapX: false ,
+                crossOrigin: 'anonymous'
             }),
         });
 
@@ -686,8 +687,8 @@
                 <dd><a href="javascript:addshape();">添加图形</a>
                     <select id="type">
                         <option value="None">无</option>
-                        <option value="LineString" selected="selected">线</option>
-                        <option value="Polygon">区</option>
+                        <option value="LineString" selected="selected">自由线</option>
+                        <option value="Polygon">多边形</option>
                         <option value="Circle">圆</option>
                     </select>
                 </dd>
@@ -702,7 +703,7 @@
                 <dd><a href="">选项三</a></dd>
             </dl>
         </li>
-        <li class="layui-nav-item"><a href="">地图导出</a></li>
+        <li class="layui-nav-item"><a href="javascript:export_map()">地图导出</a></li>
         <li class="layui-nav-item"><a href="dizhi.html">要素查询</a></li>
     </ul>
 
@@ -729,7 +730,24 @@
             });
         });
     </script>
-        
+
+    <script>
+         function export_map() {
+            map.once('postcompose', function (event) {
+                var canvas = event.context.canvas;
+               
+                if (navigator.msSaveBlob) {
+                    navigator.msSaveBlob(canvas.msToBlob(), 'map.png');
+                } else {
+                    canvas.toBlob(function (blob) {
+                        saveAs(blob, 'map.png');
+                    });
+                }
+            });
+            map.renderSync();
+        };
+    </script>    
+
     <script>
         var typeSelect = document.getElementById('type');
         var draw;

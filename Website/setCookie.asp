@@ -16,14 +16,14 @@
         var password = str.replace(" ", "");
         var conn = new ActiveXObject("ADODB.Connection");
         var rs = new ActiveXObject("ADODB.Recordset");
-        var connectionstring = "DSN=mysql;Driver={MySQL ODBC 8.0 Driver};Server=localhost;Database=gis;User=root; Password=dx123";
+        var connectionstring = "DSN=gis;Driver={MySQL ODBC 8.0 Driver};Server=localhost;Database=gis;User=root; Password=lxrlxr0602";
         conn.open(connectionstring);
-        var sql = "select pwd from user where id=" + "'"+username+"'";
+        var sql = "select Password from user where id=" + "'"+username+"'";
         rs.open(sql, conn);
         /*Response.Write(rs.Fields("pwd")+'1222222');*/
         /*Response.Write(password+'123123');*/
         if (!rs.eof) {
-            var _password = rs.Fields("pwd");
+            var _password = rs.Fields("Password");
             /*Response.Write("password: "+password+'1'+"\n"+"_password: "+_password+'1\n');*/
             //密码正确
             if (password==_password) {
