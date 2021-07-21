@@ -93,6 +93,12 @@
         </div>
     </div>
     
+    <p style="position:absolute;right:10px;top:0px;z-index:9999;color:crimson;font-style:oblique">
+        登出
+        <a href="login.asp">
+            <img border="0" src="src/images/denglu_1.png" width="50" height="50"/>
+        </a>
+    </p>
 
     <script type="text/javascript">
         //实例化鼠标位置控件
@@ -698,7 +704,7 @@
         <li class="layui-nav-item">
             <a href="javascript:;">高级功能</a>
             <dl class="layui-nav-child">
-                <dd><a href="">选项一</a></dd>
+                <dd><a href="ceju.html">测距</a></dd>
                 <dd><a href="">选项二</a></dd>
                 <dd><a href="">选项三</a></dd>
             </dl>
@@ -822,7 +828,7 @@
 
     </script>
 
-
+    
 
 </body>
 </html>
