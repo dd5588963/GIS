@@ -93,6 +93,12 @@
         </div>
     </div>
     
+    <p style="position:absolute;right:10px;top:0px;z-index:9999;color:crimson;font-style:oblique">
+        登出
+        <a href="login.asp">
+            <img border="0" src="src/images/denglu_1.png" width="50" height="50"/>
+        </a>
+    </p>
 
     <script type="text/javascript">
         //实例化鼠标位置控件
@@ -115,7 +121,8 @@
             title: "高德地图",
             source: new ol.source.XYZ({
                 url: 'http://wprd0{1-4}.is.autonavi.com/appmaptile?lang=zh_cn&size=1&style=7&x={x}&y={y}&z={z}',
-                wrapX: false
+                wrapX: false ,
+                crossOrigin: 'anonymous'
             }),
         });
 
@@ -471,7 +478,7 @@
                 elem: '#dataTable'
                 , width: 600
                 , height: 300
-                , title: '武汉市高校信息一览'
+                , title: '武汉市各级党组织信息'
                 , page: { limit: newData.length } //开启分页
                 , toolbar: 'default' //开启工具栏，此处显示默认图标，可以自定义模板，详见文档
                 , totalRow: true //开启合计行
@@ -660,9 +667,9 @@
         <li class="layui-nav-item">
             <a href="javascript:;">长征</a>
             <dl class="layui-nav-child">
-                <dd><a href="">菜单1</a></dd>
-                <dd><a href="">菜单2</a></dd>
-                <dd><a href="">菜单3</a></dd>
+                <dd><a href="changzheng.html">长征动画</a></dd>
+                <dd><a href="shijianzhou.html">长征时间轴</a></dd>
+                <dd><a href="">长征军标绘制</a></dd>
             </dl>
         </li>
         <li class="layui-nav-item">
@@ -686,8 +693,8 @@
                 <dd><a href="javascript:addshape();">添加图形</a>
                     <select id="type">
                         <option value="None">无</option>
-                        <option value="LineString" selected="selected">线</option>
-                        <option value="Polygon">区</option>
+                        <option value="LineString" selected="selected">自由线</option>
+                        <option value="Polygon">多边形</option>
                         <option value="Circle">圆</option>
                     </select>
                 </dd>
@@ -697,12 +704,12 @@
         <li class="layui-nav-item">
             <a href="javascript:;">高级功能</a>
             <dl class="layui-nav-child">
-                <dd><a href="">选项一</a></dd>
+                <dd><a href="ceju.html">测距</a></dd>
                 <dd><a href="">选项二</a></dd>
                 <dd><a href="">选项三</a></dd>
             </dl>
         </li>
-        <li class="layui-nav-item"><a href="">地图导出</a></li>
+        <li class="layui-nav-item"><a href="javascript:export_map()">地图导出</a></li>
         <li class="layui-nav-item"><a href="dizhi.html">要素查询</a></li>
     </ul>
 
@@ -728,8 +735,26 @@
                 layer.msg(elem.text());
             });
         });
-    </script>
         
+    </script>
+
+    <script>
+         function export_map() {
+            map.once('postcompose', function (event) {
+                var canvas = event.context.canvas;
+               
+                if (navigator.msSaveBlob) {
+                    navigator.msSaveBlob(canvas.msToBlob(), 'map.png');
+                } else {
+                    canvas.toBlob(function (blob) {
+                        saveAs(blob, 'map.png');
+                    });
+                }
+            });
+            map.renderSync();
+        };
+    </script>    
+
     <script>
         var typeSelect = document.getElementById('type');
         var draw;
@@ -804,7 +829,7 @@
 
     </script>
 
-
+    
 
 </body>
 </html>

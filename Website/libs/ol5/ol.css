@@ -97,8 +97,9 @@
     }
 
 .ol-zoom-extent {
-    top: 4.643em;
-    left: .5em
+    bottom:200px;
+    right:0px;
+    position:absolute
 }
 
 .ol-full-screen {
@@ -234,7 +235,7 @@
     bottom: 0px;
     position: absolute;
     right: 0px;
-    height: 200px
+    height: 190px
 }
 
     .ol-zoomslider button {

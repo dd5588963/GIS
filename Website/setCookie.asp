@@ -16,14 +16,14 @@
         var password = str.replace(" ", "");
         var conn = new ActiveXObject("ADODB.Connection");
         var rs = new ActiveXObject("ADODB.Recordset");
-        var connectionstring = "DSN=mysql;Driver={MySQL ODBC 8.0 Driver};Server=localhost;Database=gis;User=root; Password=dx123";
+        var connectionstring = "DSN=gis;Driver={MySQL ODBC 8.0 Driver};Server=localhost;Database=gis;User=root; Password=lxrlxr0602";
         conn.open(connectionstring);
-        var sql = "select pwd from user where id=" + "'"+username+"'";
+        var sql = "select Password from user where id=" + "'"+username+"'";
         rs.open(sql, conn);
         /*Response.Write(rs.Fields("pwd")+'1222222');*/
         /*Response.Write(password+'123123');*/
         if (!rs.eof) {
-            var _password = rs.Fields("pwd");
+            var _password = rs.Fields("Password");
             /*Response.Write("password: "+password+'1'+"\n"+"_password: "+_password+'1\n');*/
             //密码正确
             if (password==_password) {
@@ -32,15 +32,21 @@
             }
             //密码错误
             else {
-                Response.Write("<meta http-equiv='Content - Type' charset='utf-8' />;<script>alert('密码错误!');location='login.asp'</script>");
+
+                //Response.Redirect("login.asp");
+                Response.Write("<meta http-equiv='Content - Type' charset='utf-8' />;<script>alert('密码错误！');location='login.asp'</script>");
+                
+
             }
             
         }
         //账号未注册
         else {
             //Response.Redirect("login.asp");
+
             //Response.Write("<script language='javascript'>alert('验证码不正确！');</script>");
             Response.Write("<meta http-equiv='Content - Type' charset='utf-8' />;<script>alert('账号不存在!');location='login.asp'</script>");
+
         }
     %>
 
