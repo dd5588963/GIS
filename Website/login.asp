@@ -7,14 +7,13 @@
 		<title>登录界面</title>
 		<link rel="stylesheet" href="css/style.css" />
 	</head>
-	<script src="https://cdn.bootcss.com/blueimp-md5/2.12.0/js/md5.min.js"></script>
 
 	<body>
 	
 		<div class="login">
 			<div class="login_form">
 				<div class="form">
-					<div class="login_con" action="test.asp" method="post">
+					<div class="login_con">
 						<span class="welcome">欢迎登陆</span>
 						<br />
 						<img src="src/images/user.png" class="user" />
