@@ -478,7 +478,7 @@
                 elem: '#dataTable'
                 , width: 600
                 , height: 300
-                , title: '武汉市高校信息一览'
+                , title: '武汉市各级党组织信息'
                 , page: { limit: newData.length } //开启分页
                 , toolbar: 'default' //开启工具栏，此处显示默认图标，可以自定义模板，详见文档
                 , totalRow: true //开启合计行
@@ -667,9 +667,9 @@
         <li class="layui-nav-item">
             <a href="javascript:;">长征</a>
             <dl class="layui-nav-child">
-                <dd><a href="">菜单1</a></dd>
-                <dd><a href="">菜单2</a></dd>
-                <dd><a href="">菜单3</a></dd>
+                <dd><a href="changzheng.html">长征动画</a></dd>
+                <dd><a href="shijianzhou.html">长征时间轴</a></dd>
+                <dd><a href="">长征军标绘制</a></dd>
             </dl>
         </li>
         <li class="layui-nav-item">
@@ -735,6 +735,7 @@
                 layer.msg(elem.text());
             });
         });
+        
     </script>
 
     <script>
