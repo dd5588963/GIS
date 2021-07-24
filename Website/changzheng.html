@@ -33,54 +33,62 @@
     <script type="text/javascript">
         //构建一组离散化的点
         var Coordinates = new Array();
-        Coordinates.push([ol.proj.transform(
-            [116.03, 25.89], 'EPSG:4326', 'EPSG:3857')]);
-        Coordinates.push([ol.proj.transform(
-            [114.64, 25.36], 'EPSG:4326', 'EPSG:3857')]);
-        Coordinates.push([ol.proj.transform(
-            [113.10, 25.85], 'EPSG:4326', 'EPSG:3857')]);
-        Coordinates.push([ol.proj.transform(
-            [111.79, 26.51], 'EPSG:4326', 'EPSG:3857')]);
-        Coordinates.push([ol.proj.transform(
-            [110.01, 27.07], 'EPSG:4326', 'EPSG:3857')]);
-        Coordinates.push([ol.proj.transform(
-            [108.57, 28.37], 'EPSG:4326', 'EPSG:3857')]);
-        Coordinates.push([ol.proj.transform(
-            [105.58, 28.33], 'EPSG:4326', 'EPSG:3857')]);
-        Coordinates.push([ol.proj.transform(
-            [106.73, 28.92], 'EPSG:4326', 'EPSG:3857')]);
-        Coordinates.push([ol.proj.transform(
-            [108.25, 27.55], 'EPSG:4326', 'EPSG:3857')]);
-        Coordinates.push([ol.proj.transform(
-            [106.92, 27.75], 'EPSG:4326', 'EPSG:3857')]);
-        Coordinates.push([ol.proj.transform(
-            [107.00, 27.06], 'EPSG:4326', 'EPSG:3857')]);
-        Coordinates.push([ol.proj.transform(
-            [106.20, 26.68], 'EPSG:4326', 'EPSG:3857')]);
-        Coordinates.push([ol.proj.transform(
-            [106.84, 26.00], 'EPSG:4326', 'EPSG:3857')]);
-        Coordinates.push([ol.proj.transform(
-            [105.06, 25.46], 'EPSG:4326', 'EPSG:3857')]);
-        Coordinates.push([ol.proj.transform(
-            [102.78, 25.39], 'EPSG:4326', 'EPSG:3857')]);
-        Coordinates.push([ol.proj.transform(
-            [102.25, 26.70], 'EPSG:4326', 'EPSG:3857')]);
-        Coordinates.push([ol.proj.transform(
-            [102.13, 28.19], 'EPSG:4326', 'EPSG:3857')]);
-        Coordinates.push([ol.proj.transform(
-            [102.18, 29.20], 'EPSG:4326', 'EPSG:3857')]);
-        Coordinates.push([ol.proj.transform(
-            [102.15, 29.89], 'EPSG:4326', 'EPSG:3857')]);
-        Coordinates.push([ol.proj.transform(
-            [103.06, 32.63], 'EPSG:4326', 'EPSG:3857')]);
-        Coordinates.push([ol.proj.transform(
-            [103.92, 34.28], 'EPSG:4326', 'EPSG:3857')]);
-        Coordinates.push([ol.proj.transform(
-            [106.66, 35.68], 'EPSG:4326', 'EPSG:3857')]);
-        Coordinates.push([ol.proj.transform(
-            [108.43, 37.10], 'EPSG:4326', 'EPSG:3857')]);
-        Coordinates.push([ol.proj.transform(
-            [104.93, 35.83], 'EPSG:4326', 'EPSG:3857')]);
+        Coordinates.push([12916400.514945555, 2985463.338357315], [12761666.422764445, 2920027.708216757], [12590234.406966666, 2980514.6305977157],
+            [12444405.874047777, 3062384.9770083823], [12246257.180463333, 3132220.049017839], [12085957.113743331, 3295702.920405123],
+            [11753111.836317778, 3290643.3073263373], [11881129.250712223, 3365467.7620210475], [12050334.876694443, 3192356.638662258],
+            [11902279.95396, 3217490.915374336], [11911185.513222221, 3130969.957757931], [11822129.920599999, 3083548.5483401846],
+            [11893374.394697778, 2999080.9430531673], [11695225.701113334, 2932351.8961626184], [11441417.26214, 2923723.8920718003],
+            [11382417.932027778, 3086040.4508996094], [11369059.593134444, 3272949.6297109295], [11374625.567673333, 3401126.2635930497],
+            [11371285.98295, 3489418.1905337004], [11472586.719557779, 3846295.003527139], [11568321.481626667, 4066461.436534013],
+            [11873336.886357777, 4256678.731311091], [12070372.385034444, 4453054.6782462085], [11680754.167312223, 4277254.7759383]);
+        //Coordinates.push([ol.proj.transform(
+        //    [116.03, 25.89], 'EPSG:4326', 'EPSG:3857')]);
+        //Coordinates.push([ol.proj.transform(
+        //    [114.64, 25.36], 'EPSG:4326', 'EPSG:3857')]);
+        //Coordinates.push([ol.proj.transform(
+        //    [113.10, 25.85], 'EPSG:4326', 'EPSG:3857')]);
+        //Coordinates.push([ol.proj.transform(
+        //    [111.79, 26.51], 'EPSG:4326', 'EPSG:3857')]);
+        //Coordinates.push([ol.proj.transform(
+        //    [110.01, 27.07], 'EPSG:4326', 'EPSG:3857')]);
+        //Coordinates.push([ol.proj.transform(
+        //    [108.57, 28.37], 'EPSG:4326', 'EPSG:3857')]);
+        //Coordinates.push([ol.proj.transform(
+        //    [105.58, 28.33], 'EPSG:4326', 'EPSG:3857')]);
+        //Coordinates.push([ol.proj.transform(
+        //    [106.73, 28.92], 'EPSG:4326', 'EPSG:3857')]);
+        //Coordinates.push([ol.proj.transform(
+        //    [108.25, 27.55], 'EPSG:4326', 'EPSG:3857')]);
+        //Coordinates.push([ol.proj.transform(
+        //    [106.92, 27.75], 'EPSG:4326', 'EPSG:3857')]);
+        //Coordinates.push([ol.proj.transform(
+        //    [107.00, 27.06], 'EPSG:4326', 'EPSG:3857')]);
+        //Coordinates.push([ol.proj.transform(
+        //    [106.20, 26.68], 'EPSG:4326', 'EPSG:3857')]);
+        //Coordinates.push([ol.proj.transform(
+        //    [106.84, 26.00], 'EPSG:4326', 'EPSG:3857')]);
+        //Coordinates.push([ol.proj.transform(
+        //    [105.06, 25.46], 'EPSG:4326', 'EPSG:3857')]);
+        //Coordinates.push([ol.proj.transform(
+        //    [102.78, 25.39], 'EPSG:4326', 'EPSG:3857')]);
+        //Coordinates.push([ol.proj.transform(
+        //    [102.25, 26.70], 'EPSG:4326', 'EPSG:3857')]);
+        //Coordinates.push([ol.proj.transform(
+        //    [102.13, 28.19], 'EPSG:4326', 'EPSG:3857')]);
+        //Coordinates.push([ol.proj.transform(
+        //    [102.18, 29.20], 'EPSG:4326', 'EPSG:3857')]);
+        //Coordinates.push([ol.proj.transform(
+        //    [102.15, 29.89], 'EPSG:4326', 'EPSG:3857')]);
+        //Coordinates.push([ol.proj.transform(
+        //    [103.06, 32.63], 'EPSG:4326', 'EPSG:3857')]);
+        //Coordinates.push([ol.proj.transform(
+        //    [103.92, 34.28], 'EPSG:4326', 'EPSG:3857')]);
+        //Coordinates.push([ol.proj.transform(
+        //    [106.66, 35.68], 'EPSG:4326', 'EPSG:3857')]);
+        //Coordinates.push([ol.proj.transform(
+        //    [108.43, 37.10], 'EPSG:4326', 'EPSG:3857')]);
+        //Coordinates.push([ol.proj.transform(
+        //    [104.93, 35.83], 'EPSG:4326', 'EPSG:3857')]);
         console.log(Coordinates);
         //for (var i = 0; i < 600000; i += 5000) {
         //    Coordinates.push([(-30322402) + i, 5444359 - i]);
@@ -123,7 +131,7 @@
             'route': new ol.style.Style({
                 stroke: new ol.style.Stroke({
                     width: 6,
-                    color: [237, 212, 0, 0.8]
+                    color: '#b22222'
                 })
             }),
             'icon': new ol.style.Style({
@@ -163,9 +171,10 @@
             }
         });
 
+        var center = [12916400.514945555, 2985463.338357315];
         /*var center = [-28480226.95, 4254221.52];*/
-        var center= ol.proj.transform(
-            [116.03, 25.89], 'EPSG:4326', 'EPSG:3857');
+        //var center= ol.proj.transform(
+        //    [116.03, 25.89], 'EPSG:4326', 'EPSG:3857');
         var map = new ol.Map({
             target: document.getElementById('mapCon'),
             loadTilesWhileAnimating: true,
@@ -207,7 +216,7 @@
             if (animating) {
                 var elapsedTime = frameState.time - now;
                 //通过增加速度，来获得lineString坐标
-                var index = Math.round(speed * elapsedTime / 5000);
+                var index = Math.round(speed * elapsedTime / 50000);
 
                 if (index >= routeLength) {
                     stopAnimation(true);

@@ -32,21 +32,16 @@
             }
             //密码错误
             else {
-
                 //Response.Redirect("login.asp");
                 Response.Write("<meta http-equiv='Content - Type' charset='utf-8' />;<script>alert('密码错误！');location='login.asp'</script>");
                 
-
             }
             
         }
         //账号未注册
         else {
             //Response.Redirect("login.asp");
-
-            //Response.Write("<script language='javascript'>alert('验证码不正确！');</script>");
-            Response.Write("<meta http-equiv='Content - Type' charset='utf-8' />;<script>alert('账号不存在!');location='login.asp'</script>");
-
+            Response.Write("<meta http-equiv='Content - Type' charset='utf-8' />;<script>alert('账号不存在！');location='login.asp'</script>");
         }
     %>
 

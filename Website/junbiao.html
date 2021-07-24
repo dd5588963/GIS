@@ -2,14 +2,15 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title>军标标绘</title>
-    <link href="../../libs/ol5/ol.css" rel="stylesheet" type="text/css" />
+    <link href="libs/ol5/ol.css" rel="stylesheet" type="text/css" />
     <!--  引入第三方插件库 -->
-    <script src="../../libs/jquery-1.11.2.min.js" type="text/javascript"></script>
-    <script src="../../libs/ol5/MapGis_ol_product.js"></script>
-    <link href="../../libs/jqueryEasyui/themes/default/easyui.css" rel="stylesheet" type="text/css" />
-    <link href="../../libs/jqueryEasyui/themes/icon.css" rel="stylesheet" type="text/css" />
-    <link href="../../libs/jqueryEasyui/themes/color.css" rel="stylesheet" type="text/css" />
-    <script src="../../libs/jqueryEasyui/jquery.easyui.min.js" type="text/javascript"></script>
+    <script src="src/jquery-1.11.1.min.js" type="text/javascript"></script>
+    <script src="libs/ol5/MapGis_ol_product.js"></script>
+
+    <link href="libs/themes/default/easyui.css" rel="stylesheet" type="text/css" />
+    <link href="libs/themes/icon.css" rel="stylesheet" type="text/css" />
+    <link href="libs/themes/color.css" rel="stylesheet" type="text/css" />
+    <script src="libs/jquery.easyui.min.js" type="text/javascript"></script>
     <link href="../../libs/colorPicker/js_color_picker_v2.css" rel="stylesheet" type="text/css" />
     <script src="../../libs/colorPicker/js_color_picker_v2.js" type="text/javascript"></script>
     <script src="../../libs/colorPicker/color_functions.js" type="text/javascript"></script>
@@ -66,7 +67,7 @@
                 ip: "develop.smaryun.com",
                 port: "6163",    //访问IGServer的端口号，.net版为6163，Java版为8089,
                 //天地图key
-                token: parent.TiandituKey(),
+                token: "b66ca40c27956bec0f3ce4dd2e94235b",
             });
             var layer2 = new Zondy.Map.TianDiTu({
                 layerType: Zondy.Enum.Map.TiandituType.CVA_IGS,
@@ -74,16 +75,40 @@
                 ip: "develop.smaryun.com",
                 port: "6163",   //访问IGServer的端口号，.net版为6163，Java版为8089,
                 //天地图key
-                token: parent.TiandituKey(),
+                token: "b66ca40c27956bec0f3ce4dd2e94235b",
             });
             //初始化地图容器
             map = new ol.Map({
                 target: 'mapCon',
-                layers: [layer1, layer2, drawLayer],
+                layers: [layer1, layer2, drawLayer, vector2],
                 view: new ol.View({
-                    center: ol.proj.transform([-93.27, 44.98], 'EPSG:4326', 'EPSG:3857'),
+                    center: ol.proj.transform([114.6, 30.4], 'EPSG:4326', 'EPSG:3857'),
                     zoom: 3
-                })
+                }),
+
+            controls: [
+                new ol.control.MousePosition(
+                    {
+                        target: document.getElementById('mouse-position')
+                    }
+                )
+            ],
+
+            //layers: [
+            //    new ol.layer.Tile({
+            //        title: "天地图矢量图层",
+            //        source: new ol.source.XYZ({
+            //            url: "http://t0.tianditu.com/DataServer?T=vec_w&x={x}&y={y}&l={z}&tk=" + "b66ca40c27956bec0f3ce4dd2e94235b",//parent.TiandituKey()为天地图密钥
+            //        })
+            //    }),
+            //    new ol.layer.Tile({
+            //        title: "天地图矢量注记图层",
+            //        source: new ol.source.XYZ({
+            //            url: "http://t0.tianditu.com/DataServer?T=cva_w&x={x}&y={y}&l={z}&tk=" + "b66ca40c27956bec0f3ce4dd2e94235b",//parent.TiandituKey()为天地图密钥
+            //        })
+            //    }),
+            //    /*vectorLayer*/
+            //]
             });
 
             drawTool = new MilStd.tool.MilStdDrawTool(map);
@@ -350,6 +375,51 @@
             removeInteractions();
             source.clear();
         }
+
+
+        //创建一个线
+        var Line = new ol.Feature({
+            geometry: new ol.geom.LineString
+                ([[12916400.514945555, 2985463.338357315], [12761666.422764445, 2920027.708216757], [12590234.406966666, 2980514.6305977157],
+                    [12444405.874047777, 3062384.9770083823], [12246257.180463333, 3132220.049017839], [12085957.113743331, 3295702.920405123],
+                    [11753111.836317778, 3290643.3073263373], [11881129.250712223, 3365467.7620210475], [12050334.876694443, 3192356.638662258],
+                    [11902279.95396, 3217490.915374336], [11911185.513222221, 3130969.957757931], [11822129.920599999, 3083548.5483401846],
+                    [11893374.394697778, 2999080.9430531673], [11695225.701113334, 2932351.8961626184], [11441417.26214, 2923723.8920718003],
+                    [11382417.932027778, 3086040.4508996094], [11369059.593134444, 3272949.6297109295], [11374625.567673333, 3401126.2635930497],
+                    [11371285.98295, 3489418.1905337004], [11472586.719557779, 3846295.003527139], [11568321.481626667, 4066461.436534013],
+                    [11873336.886357777, 4256678.731311091], [12070372.385034444, 4453054.6782462085], [11680754.167312223, 4277254.7759383] ])
+        });
+
+        //设置线的样式
+        Line.setStyle(new ol.style.Style({
+            //填充色
+            fill: new ol.style.Fill({
+                color: 'rgba(255, 255, 255, 0.2)'
+            }),
+            //边线颜色
+            stroke: new ol.style.Stroke({
+                color: '#b22222',
+                width: 5
+            }),
+            //形状
+            image: new ol.style.Circle({
+                radius: 7,
+                fill: new ol.style.Fill({
+                    color: '#b22222'
+                })
+            })
+        }));
+
+        //实例化一个矢量图层Vector作为绘制层
+        var source2 = new ol.source.Vector({
+            features: [Line]
+        });
+        //创建一个图层
+        var vector2 = new ol.layer.Vector({
+            source: source2
+        });
+        //将绘制层添加到地图容器中
+        /*map.addLayer(vector2);*/
     </script>
 </head>
 <body onload="init()">
@@ -372,28 +442,28 @@
                                     </td>
                                     <td>
                                         <div style="border: 1px dotted gray; padding: 5px; width: 50px; height: 50px">
-                                            <img src="../../images/ArrowIcon/custom_tail_arrow.png" title="简单箭头" style="cursor: pointer;"
+                                            <img src="src/images/junbiao/custom_tail_arrow.png" title="简单箭头" style="cursor: pointer;"
                                                  onclick="drawArrow('SimpleArrow')" onmouseover="this.style.width='50px';this.style.height='50px';"
                                                  onmouseout="this.style.width='44px';this.style.height='44px';" />
                                         </div>
                                     </td>
                                     <td>
                                         <div style="border: 1px dotted gray; padding: 5px; width: 50px; height: 50px">
-                                            <img src="../../images/ArrowIcon/stright_arrow.png" title="直箭头" style="cursor: pointer;"
+                                            <img src="src/images/junbiao/stright_arrow.png" title="直箭头" style="cursor: pointer;"
                                                  onclick="drawArrow('StraightArrow')" onmouseover="this.style.width='50px';this.style.height='50px';"
                                                  onmouseout="this.style.width='44px';this.style.height='44px';" />
                                         </div>
                                     </td>
                                     <td>
                                         <div style="border: 1px dotted gray; padding: 5px; width: 50px; height: 50px">
-                                            <img src="../../images/ArrowIcon/double_arrow.png" title="双箭头" style="cursor: pointer;"
+                                            <img src="src/images/junbiao/double_arrow.png" title="双箭头" style="cursor: pointer;"
                                                  onclick="drawArrow('DoubleArrow')" onmouseover="this.style.width='50px';this.style.height='50px';"
                                                  onmouseout="this.style.width='44px';this.style.height='44px';" />
                                         </div>
                                     </td>
                                     <td>
                                         <div style="border: 1px dotted gray; padding: 5px; width: 50px; height: 50px">
-                                            <img src="../../images/ArrowIcon/singleLine_arrow.png" title="单线箭头" style="cursor: pointer;"
+                                            <img src="src/images/junbiao/singleLine_arrow.png" title="单线箭头" style="cursor: pointer;"
                                                  onclick="drawArrow('SingleLineArrow')" onmouseover="this.style.width='50px';this.style.height='50px';"
                                                  onmouseout="this.style.width='44px';this.style.height='44px';" />
                                         </div>
@@ -407,35 +477,35 @@
                                     </td>
                                     <td>
                                         <div style="border: 1px dotted gray; padding: 5px; width: 50px; height: 50px">
-                                            <img src="../../images/ArrowIcon/arrowcross.png" title="十字箭头指北针" style="cursor: pointer;"
+                                            <img src="src/images/junbiao/arrowcross.png" title="十字箭头指北针" style="cursor: pointer;"
                                                  onclick="drawArrow('ArrowCross')" onmouseover="this.style.width='50px';this.style.height='50px';"
                                                  onmouseout="this.style.width='44px';this.style.height='44px';" />
                                         </div>
                                     </td>
                                     <td>
                                         <div style="border: 1px dotted gray; padding: 5px; width: 50px; height: 50px">
-                                            <img src="../../images/ArrowIcon/CircleClosedangleCompass.png" title="圆形尖角指北针" style="cursor: pointer;"
+                                            <img src="src/images/junbiao/CircleClosedangleCompass.png" title="圆形尖角指北针" style="cursor: pointer;"
                                                  onclick="drawArrow('CircleClosedangle')" onmouseover="this.style.width='50px';this.style.height='50px';"
                                                  onmouseout="this.style.width='44px';this.style.height='44px';" />
                                         </div>
                                     </td>
                                     <td>
                                         <div style="border: 1px dotted gray; padding: 5px; width: 50px; height: 50px">
-                                            <img src="../../images/ArrowIcon/closedangle.png" title="尖角指北针" style="cursor: pointer;"
+                                            <img src="src/images/junbiao/closedangle.png" title="尖角指北针" style="cursor: pointer;"
                                                  onclick="drawArrow('Closedangle')" onmouseover="this.style.width='50px';this.style.height='50px';"
                                                  onmouseout="this.style.width='44px';this.style.height='44px';" />
                                         </div>
                                     </td>
                                     <td>
                                         <div style="border: 1px dotted gray; padding: 5px; width: 50px; height: 50px">
-                                            <img src="../../images/ArrowIcon/DoubleClosedangleCompass.png" title="双向尖角指北针" style="cursor: pointer;"
+                                            <img src="src/images/junbiao/DoubleClosedangleCompass.png" title="双向尖角指北针" style="cursor: pointer;"
                                                  onclick="drawArrow('DoubleClosedangle')" onmouseover="this.style.width='50px';this.style.height='50px';"
                                                  onmouseout="this.style.width='44px';this.style.height='44px';" />
                                         </div>
                                     </td>
                                     <td>
                                         <div style="border: 1px dotted gray; padding: 5px; width: 50px; height: 50px">
-                                            <img src="../../images/ArrowIcon/fourstar.png" title="四角指北针" style="cursor: pointer;"
+                                            <img src="src/images/junbiao/fourstar.png" title="四角指北针" style="cursor: pointer;"
                                                  onclick="drawArrow('Fourstar')" onmouseover="this.style.width='50px';this.style.height='50px';"
                                                  onmouseout="this.style.width='44px';this.style.height='44px';" />
                                         </div>
@@ -445,28 +515,28 @@
                                     <td></td>
                                     <td>
                                         <div style="border: 1px dotted gray; padding: 5px; width: 50px; height: 50px">
-                                            <img src="../../images/ArrowIcon/rhombus.png" title="菱形指北针" style="cursor: pointer;"
+                                            <img src="src/images/junbiao/rhombus.png" title="菱形指北针" style="cursor: pointer;"
                                                  onclick="drawArrow('Rhombus')" onmouseover="this.style.width='50px';this.style.height='50px';"
                                                  onmouseout="this.style.width='44px';this.style.height='44px';" />
                                         </div>
                                     </td>
                                     <td>
                                         <div style="border: 1px dotted gray; padding: 5px; width: 50px; height: 50px">
-                                            <img src="../../images/ArrowIcon/SameDirectionClosedangleCompass.png" title="同向尖角指北针"
+                                            <img src="src/images/junbiao/SameDirectionClosedangleCompass.png" title="同向尖角指北针"
                                                  style="cursor: pointer;" onclick="drawArrow('SameDirectionClosedangle')" onmouseover="this.style.width='50px';this.style.height='50px';"
                                                  onmouseout="this.style.width='44px';this.style.height='44px';" />
                                         </div>
                                     </td>
                                     <td>
                                         <div style="border: 1px dotted gray; padding: 5px; width: 50px; height: 50px">
-                                            <img src="../../images/ArrowIcon/triangle.png" title="三角指北针" style="cursor: pointer;"
+                                            <img src="src/images/junbiao/triangle.png" title="三角指北针" style="cursor: pointer;"
                                                  onclick="drawArrow('Triangle')" onmouseover="this.style.width='50px';this.style.height='50px';"
                                                  onmouseout="this.style.width='44px';this.style.height='44px';" />
                                         </div>
                                     </td>
                                     <td>
                                         <div style="border: 1px dotted gray; padding: 5px; width: 50px; height: 50px">
-                                            <img src="../../images/ArrowIcon/VaneCompass.png" title="风向标指北针" style="cursor: pointer;"
+                                            <img src="src/images/junbiao/VaneCompass.png" title="风向标指北针" style="cursor: pointer;"
                                                  onclick="drawArrow('Vane')" onmouseover="this.style.width='50px';this.style.height='50px';"
                                                  onmouseout="this.style.width='44px';this.style.height='44px';" />
                                         </div>
@@ -480,21 +550,21 @@
                                     </td>
                                     <td>
                                         <div style="border: 1px dotted gray; padding: 5px; width: 50px; height: 50px">
-                                            <img src="../../images/ArrowIcon/triangle_flag.png" title="三角旗" style="cursor: pointer;"
+                                            <img src="src/images/junbiao/triangle_flag.png" title="三角旗" style="cursor: pointer;"
                                                  onclick="drawArrow('TriangleFlag')" onmouseover="this.style.width='50px';this.style.height='50px';"
                                                  onmouseout="this.style.width='44px';this.style.height='44px';" />
                                         </div>
                                     </td>
                                     <td>
                                         <div style="border: 1px dotted gray; padding: 5px; width: 50px; height: 50px">
-                                            <img src="../../images/ArrowIcon/rect_flag.png" title="矩形旗" style="cursor: pointer;"
+                                            <img src="src/images/junbiao/rect_flag.png" title="矩形旗" style="cursor: pointer;"
                                                  onclick="drawArrow('RectFlag')" onmouseover="this.style.width='50px';this.style.height='50px';"
                                                  onmouseout="this.style.width='44px';this.style.height='44px';" />
                                         </div>
                                     </td>
                                     <td>
                                         <div style="border: 1px dotted gray; padding: 5px; width: 50px; height: 50px">
-                                            <img src="../../images/ArrowIcon/curve_flag.png" title="波浪旗" style="cursor: pointer;"
+                                            <img src="src/images/junbiao/curve_flag.png" title="波浪旗" style="cursor: pointer;"
                                                  onclick="drawArrow('CurveFlag')" onmouseover="this.style.width='50px';this.style.height='50px';"
                                                  onmouseout="this.style.width='44px';this.style.height='44px';" />
                                         </div>
@@ -508,21 +578,21 @@
                                     </td>
                                     <td>
                                         <div style="border: 1px dotted gray; padding: 5px; width: 50px; height: 50px">
-                                            <img src="../../images/ArrowIcon/arbitrary_area.png" title="任意区" style="cursor: pointer;"
+                                            <img src="src/images/junbiao/arbitrary_area.png" title="任意区" style="cursor: pointer;"
                                                  onclick="drawArrow('Bezier')" onmouseover="this.style.width='50px';this.style.height='50px';"
                                                  onmouseout="this.style.width='44px';this.style.height='44px';" />
                                         </div>
                                     </td>
                                     <td>
                                         <div style="border: 1px dotted gray; padding: 5px; width: 50px; height: 50px">
-                                            <img src="../../images/ArrowIcon/assembly.png" title="集结区" style="cursor: pointer;"
+                                            <img src="src/images/junbiao/assembly.png" title="集结区" style="cursor: pointer;"
                                                  onclick="drawArrow('AssemblyArea')" onmouseover="this.style.width='50px';this.style.height='50px';"
                                                  onmouseout="this.style.width='44px';this.style.height='44px';" />
                                         </div>
                                     </td>
                                     <td>
                                         <div style="border: 1px dotted gray; padding: 5px; width: 50px; height: 50px">
-                                            <img src="../../images/ArrowIcon/smooth_curve.png" title="光滑曲线" style="cursor: pointer;"
+                                            <img src="src/images/junbiao/smooth_curve.png" title="光滑曲线" style="cursor: pointer;"
                                                  onclick="drawArrow('BezierLine')" onmouseover="this.style.width='50px';this.style.height='50px';"
                                                  onmouseout="this.style.width='44px';this.style.height='44px';" />
                                         </div>

@@ -663,28 +663,34 @@
         <li class="layui-nav-item">
             <a href="xinwen.html">新闻</a>
         </li>
-        <li class="layui-nav-item"><a href="earth.html">党建</a></li>
+        <li class="layui-nav-item"><a href="javascript:;">数据</a>
+            <dl class="layui-nav-child" style="z-index:9999">
+                <dd><a href="earth.html">大国外交</a></dd>
+                <dd><a href="shijianzhou.html">经济建设</a></dd>
+                <dd><a href="junbiao.html">人口变化</a></dd>
+            </dl>
+        </li>
         <li class="layui-nav-item">
             <a href="javascript:;">长征</a>
             <dl class="layui-nav-child">
                 <dd><a href="changzheng.html">长征动画</a></dd>
                 <dd><a href="shijianzhou.html">长征时间轴</a></dd>
-                <dd><a href="">长征军标绘制</a></dd>
+                <dd><a href="junbiao.html">长征军标绘制</a></dd>
             </dl>
         </li>
         <li class="layui-nav-item">
             <a href="javascript:;">地图分析</a>
             <dl class="layui-nav-child">
-                <dd><a href="">选项1</a></dd>
-                <dd class="layui-this"><a href="">选项2</a></dd>
-                <dd><a href="">选项3</a></dd>
+                <dd><a href="">几何分析</a></dd>
+                <dd class="layui-this"><a href="">空间分析</a></dd>
+                <dd><a href="">网络分析</a></dd>
             </dl>
         </li>
         <li class="layui-nav-item"><a href="">帮助</a></li>
     </ul>
 
 
-    <ul class="layui-nav layui-nav-tree layui-inline" lay-filter="demo" style="margin-right: 0px;z-index:9999">
+    <ul class="layui-nav layui-nav-tree layui-inline" lay-filter="demo" style="margin-right: 0px;z-index:9997">
         <li class="layui-nav-item layui-nav-itemed">
             <a href="javascript:;">基础功能</a>
             <dl class="layui-nav-child">
@@ -705,8 +711,8 @@
             <a href="javascript:;">高级功能</a>
             <dl class="layui-nav-child">
                 <dd><a href="ceju.html">测距</a></dd>
-                <dd><a href="">选项二</a></dd>
-                <dd><a href="">选项三</a></dd>
+                <dd><a href="">地图动画</a></dd>
+                <dd><a href="">地图热区</a></dd>
             </dl>
         </li>
         <li class="layui-nav-item"><a href="javascript:export_map()">地图导出</a></li>
@@ -720,7 +726,7 @@
     <a href="http://www.zgdsw.com/" style="color:red;position:absolute;bottom:10px;left:900px">中国党史网</a>
     <a href="http://www.youth.cn/" style="color:red;position:absolute;bottom:10px;left:1100px">中国青年网</a>
     <a href="http://www.gov.cn/" style="color:red;position:absolute;bottom:10px;left:1300px">中国政府网</a>
-    <a href="http://www.china.com.cn/" style="color:red;position:absolute;bottom:10px;left:1500px">中国网</a>
+    <!--<a href="http://www.china.com.cn/" style="color:red;position:absolute;bottom:10px;left:1500px">中国网</a>-->
 
 
     <script src="//res.layui.com/layui/dist/layui.js" charset="utf-8"></script>
