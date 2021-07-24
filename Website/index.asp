@@ -711,8 +711,8 @@
             <a href="javascript:;">高级功能</a>
             <dl class="layui-nav-child">
                 <dd><a href="ceju.html">测距</a></dd>
-                <dd><a href="">地图动画</a></dd>
-                <dd><a href="">地图热区</a></dd>
+                <dd><a href="donghua.html">地图动画</a></dd>
+                <dd><a href="requ.html">地图热区</a></dd>
             </dl>
         </li>
         <li class="layui-nav-item"><a href="javascript:export_map()">地图导出</a></li>
