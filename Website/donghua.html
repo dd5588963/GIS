@@ -2,7 +2,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <title>动画效果控件</title>
+    <title>地图动画</title>
     <!--导入本页面外部样式表-->
     <link href="../../css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link href="../../libs/ol5/ol.css" rel="stylesheet" type="text/css" />
@@ -19,6 +19,14 @@
     </div>
     <div id="mapCon">
     </div>
+
+    <p style="position:absolute;right:10px;top:0px;z-index:99999;color:crimson;font-style:oblique">
+        返回首页
+        <a href="index.asp">
+            <img border="0" src="src/images/fanhui.png" width="50" height="50" />
+        </a>
+    </p>
+
     <script type="text/javascript">
         //实例化地图视图对象
         var view = new ol.View({
@@ -89,22 +97,22 @@
         document.getElementById('spin').onclick = function () {
             var center = view.getCenter();
             view.animate(
-                 //第一个过程
+                //第一个过程
                 {
-                //动画结束时的视图中心,即当前视图中心同目标视图中心连线的中心点
-                center: [
-                  center[0] + (shenyang[0] - shenyang[0]) / 2,
-                  center[1] + (shenyang[1] - shenyang[1]) / 2
-                ],
-                rotation: Math.PI,//动画结束时的旋转角度，即180度
-                easing: ol.easing.easeIn//按每一帧动画控制的动画速度，即开始缓慢并逐渐加快速度
-            },
-            //第二个过程
-            {
-                center: shenyang,//动画结束时的视图中心
-                rotation: 2 * Math.PI,//动画结束时的旋转角度，即360度回正
-                easing: ol.easing.easeOut//按每一帧动画控制的动画速度，即开始快速并逐渐减速
-            });
+                    //动画结束时的视图中心,即当前视图中心同目标视图中心连线的中心点
+                    center: [
+                        center[0] + (shenyang[0] - shenyang[0]) / 2,
+                        center[1] + (shenyang[1] - shenyang[1]) / 2
+                    ],
+                    rotation: Math.PI,//动画结束时的旋转角度，即180度
+                    easing: ol.easing.easeIn//按每一帧动画控制的动画速度，即开始缓慢并逐渐加快速度
+                },
+                //第二个过程
+                {
+                    center: shenyang,//动画结束时的视图中心
+                    rotation: 2 * Math.PI,//动画结束时的旋转角度，即360度回正
+                    easing: ol.easing.easeOut//按每一帧动画控制的动画速度，即开始快速并逐渐减速
+                });
         };
         //弹性伸缩效果定位
         document.getElementById('elastic').onclick = function () {
@@ -128,16 +136,16 @@
             view.animate(
                 //第一个过程
                 {
-                rotation: rotation + Math.PI,//第一次动画旋转角度
-                anchor: wuhan,//自旋的中心点，即武汉
-                easing: ol.easing.easeIn////按每一帧动画控制的动画速度，即开始缓慢并逐渐加快速度
+                    rotation: rotation + Math.PI,//第一次动画旋转角度
+                    anchor: wuhan,//自旋的中心点，即武汉
+                    easing: ol.easing.easeIn////按每一帧动画控制的动画速度，即开始缓慢并逐渐加快速度
                 },
                 //第二个过程
-            {
-                rotation: rotation + 2 * Math.PI,//动画结束时的旋转角度，即360度回正
-                anchor: wuhan,// 旋转中心点
-                easing: ol.easing.easeOut///按每一帧动画控制的动画速度，即开始快速并逐渐减速
-            });
+                {
+                    rotation: rotation + 2 * Math.PI,//动画结束时的旋转角度，即360度回正
+                    anchor: wuhan,// 旋转中心点
+                    easing: ol.easing.easeOut///按每一帧动画控制的动画速度，即开始快速并逐渐减速
+                });
         };
         //飞行效果定位
         document.getElementById('fly').onclick = function () {

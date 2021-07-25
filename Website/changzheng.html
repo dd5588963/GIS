@@ -30,6 +30,12 @@
         <div id="mouse-position" style="float: left; position: absolute; bottom: 5px; width: 350px; height: 20px; z-index: 2000;">
         </div>
     </div>
+    <p style="position:absolute;right:10px;top:0px;z-index:99999;color:crimson;font-style:oblique">
+        返回首页
+        <a href="index.asp">
+            <img border="0" src="src/images/fanhui.png" width="50" height="50" />
+        </a>
+    </p>
     <script type="text/javascript">
         //构建一组离散化的点
         var Coordinates = new Array();
@@ -103,7 +109,7 @@
         //    Coordinates.push([(-30322402) + 1800000 + h, 5444359 - 1200000]);
 
         //}
-        
+
         //将离散点构建成一条折线
         var route = new ol.geom.LineString(Coordinates);
         //获取直线的坐标
@@ -137,7 +143,7 @@
             'icon': new ol.style.Style({
                 image: new ol.style.Icon({
                     anchor: [0.5, 1],
-                    src:"src/images/icon_marker.png"
+                    src: "src/images/icon_marker.png"
                 })
             }),
             'geoMarker': new ol.style.Style({
@@ -187,10 +193,10 @@
             }),
             controls: [
                 new ol.control.MousePosition(
-                {
-                    target: document.getElementById('mouse-position')
-                }
-            )
+                    {
+                        target: document.getElementById('mouse-position')
+                    }
+                )
             ],
             layers: [
                 new ol.layer.Tile({
