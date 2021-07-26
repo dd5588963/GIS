@@ -6,7 +6,7 @@
           content="width=device-width,
           initial-scale=1.0, minimum-scale=1.0,
           maximum-scale=1.0, user-scalable=no" />
-    <title>百年党史地图系统</title>
+    <title>武汉市红旅党建地图系统</title>
     <meta name="renderer" content="webkit" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
@@ -146,8 +146,10 @@
                 // 新增代码
                 new ol.control.ZoomToExtent({           // 缩放至特定位置控件
                     extent: [
-                        12757813, 3562826,
-                        12759092, 3563187
+                        //12757813, 3562826,
+                        //12759092, 3563187
+                        12759193, 3562468,
+                        12759836, 3563152
                     ]
                 })
             ])
@@ -666,8 +668,8 @@
         <li class="layui-nav-item"><a href="javascript:;">数据</a>
             <dl class="layui-nav-child" style="z-index:9999">
                 <dd><a href="earth.html">大国外交</a></dd>
-                <dd><a href="shijianzhou.html">经济建设</a></dd>
-                <dd><a href="junbiao.html">人口变化</a></dd>
+                <dd><a href="jingji.html">经济建设</a></dd>
+                <dd><a href="people.html">人口变化</a></dd>
             </dl>
         </li>
         <li class="layui-nav-item">
@@ -681,17 +683,17 @@
         <li class="layui-nav-item">
             <a href="javascript:;">地图分析</a>
             <dl class="layui-nav-child">
-                <dd><a href="">几何分析</a></dd>
-                <dd class="layui-this"><a href="">空间分析</a></dd>
-                <dd><a href="">网络分析</a></dd>
+                <dd><a href="jihe.html">几何分析</a></dd>
+                <dd><a href="kongjian.html">空间分析</a></dd>
+                <dd><a href="wangluo.html">网络分析</a></dd>
             </dl>
         </li>
-        <li class="layui-nav-item"><a href="">帮助</a></li>
+        <li class="layui-nav-item"><a href="bangzhu.html">帮助</a></li>
     </ul>
 
 
     <ul class="layui-nav layui-nav-tree layui-inline" lay-filter="demo" style="margin-right: 0px;z-index:9997">
-        <li class="layui-nav-item layui-nav-itemed">
+        <li class="layui-nav-item ">
             <a href="javascript:;">基础功能</a>
             <dl class="layui-nav-child">
                 <dd><a href="javascript:addpoint();">添加点</a></dd>
@@ -710,7 +712,7 @@
         <li class="layui-nav-item">
             <a href="javascript:;">高级功能</a>
             <dl class="layui-nav-child">
-                <dd><a href="ceju.html">测距</a></dd>
+                <dd><a href="ceju.html">地图测距</a></dd>
                 <dd><a href="donghua.html">地图动画</a></dd>
                 <dd><a href="requ.html">地图热区</a></dd>
             </dl>

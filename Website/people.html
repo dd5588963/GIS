@@ -1,0 +1,78 @@
+﻿<!--
+    THIS EXAMPLE WAS DOWNLOADED FROM https://echarts.apache.org/examples/zh/editor.html?c=bar-y-category
+-->
+<!DOCTYPE html>
+<html style="height: 100%">
+<head>
+    <meta charset="utf-8">
+    <title>人口变化</title>
+</head>
+<body style="height: 100%; margin: 0">
+    <div id="container" style="height: 100%"></div>
+
+    <script type="text/javascript" src="js/echarts.min.js"></script>
+
+
+    <script type="text/javascript">
+    var dom = document.getElementById("container");
+        var myChart = echarts.init(dom);
+        var app = {};
+
+        var option;
+
+
+
+        option = {
+            title: {
+                text: '中国人口和世界人口对比',
+                subtext: '单位：百万'
+            },
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'shadow'
+                }
+            },
+            legend: {
+                data: ['中国', '世界']
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis: {
+                type: 'category',
+                data: ['1960', '1970', '1980', '1990', '2000', '2010', '2020']
+            },
+            yAxis: {
+
+                type: 'value',
+                boundaryGap: [0, 0.01]
+            },
+            series: [
+                {
+                    name: '中国',
+                    type: 'bar',
+                    data: [667.07, 818.315, 981.235, 1135, 1263, 1388, 1402]
+                },
+                {
+                    name: '世界',
+                    type: 'bar',
+                    data: [3032, 3682, 4443, 5280, 6114, 6922, 7753]
+                }
+            ]
+        };
+
+        if (option && typeof option === 'object') {
+            myChart.setOption(option);
+        }</script>
+    <p style="position:absolute;right:10px;top:0px;z-index:99999;color:crimson;font-style:oblique">
+        返回首页
+        <a href="index.asp">
+            <img border="0" src="src/images/fanhui.png" width="50" height="50" />
+        </a>
+    </p>
+</body>
+</html>

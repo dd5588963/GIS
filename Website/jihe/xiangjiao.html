@@ -1,0 +1,225 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>拓扑相交</title>
+    <!--导入外部样式表-->
+    <link href="../../libs/ol5/style.css" rel="stylesheet" type="text/css" />
+    <link href="../../libs/ol5/ol.css" rel="stylesheet" type="text/css" />
+    <!--必要的脚本引用-->
+    <script src="../../libs/ol5/jquery-1.11.2.min.js" type="text/javascript"></script>
+    <script src="../../libs/ol5/MapGis_ol_product.js"></script>
+    <script type="text/javascript">
+        /*==========================================底图显示===================================================*/
+        var map, vectorLayer;
+        //创建线对象
+        var lineObj = new Zondy.Object.GLine(
+            new Zondy.Object.AnyLine([new Zondy.Object.Arc
+                ([
+                    new Zondy.Object.Point2D(114.40, 30.60),
+                    new Zondy.Object.Point2D(114.45, 30.20)
+                ])
+            ])
+        );
+        //创建区几何对象
+        var regionObj = new Zondy.Object.GRegion([
+            new Zondy.Object.AnyLine([new Zondy.Object.Arc([
+                new Zondy.Object.Point2D(114.301586, 30.533613),
+                new Zondy.Object.Point2D(114.301586, 30.396517),
+                new Zondy.Object.Point2D(114.544453, 30.396517),
+                new Zondy.Object.Point2D(114.444453, 30.533613),
+                new Zondy.Object.Point2D(114.401586, 30.533613)
+            ])
+            ])
+        ]);
+        //地图初始化函数
+        function init() {
+            //初始化天地图图层
+            //var layer1 = new Zondy.Map.TianDiTu({
+            //    layerType: Zondy.Enum.Map.TiandituType.VEC_IGS,
+            //    projection: ol.proj.get('EPSG:4326'),
+            //    ip: "develop.smaryun.com",
+            //    port: "6163",    //访问IGServer的端口号，.net版为6163，Java版为8089,
+            //    //天地图key
+            //    token: "b66ca40c27956bec0f3ce4dd2e94235b",
+            //});
+            //var layer2 = new Zondy.Map.TianDiTu({
+            //    layerType: Zondy.Enum.Map.TiandituType.CVA_IGS,
+            //    projection: ol.proj.get('EPSG:4326'),
+            //    ip: "develop.smaryun.com",
+            //    port: "6163",    //访问IGServer的端口号，.net版为6163，Java版为8089,
+            //    //天地图key
+            //    token: "b66ca40c27956bec0f3ce4dd2e94235b",
+            //});
+
+            var layer1 = new ol.layer.Tile({
+                title: "天地图矢量图层",
+                source: new ol.source.XYZ({
+                    url: "http://t0.tianditu.com/DataServer?T=vec_c&x={x}&y={y}&l={z}&tk=" + "b66ca40c27956bec0f3ce4dd2e94235b",//parent.TiandituKey()为天地图密钥,
+                    projection: ol.proj.get('EPSG:4326'),
+                    wrapX: false
+                })
+            });
+            var layer2 = new ol.layer.Tile({
+                title: "天地图矢量注记图层",
+                source: new ol.source.XYZ({
+                    url: "http://t0.tianditu.com/DataServer?T=cva_c&x={x}&y={y}&l={z}&tk=" + "b66ca40c27956bec0f3ce4dd2e94235b",//parent.TiandituKey()为天地图密钥
+                    projection: ol.proj.get('EPSG:4326')
+                })
+            });
+            //初始化地图容器
+            map = new ol.Map({
+                target: 'mapCon',
+                layers: [layer1, layer2],
+                view: new ol.View({
+                    center: [114, 30],
+                    zoom: 7,
+                    projection: "EPSG:4326"
+                })
+            });
+            /************************************************************************************************/
+            //将点几何和区几何添加到地图进行显示（非必需，仅仅为了在地图上高亮显示图形）
+            var linePntArr = [];
+            var linPointArr = [];
+            for (var i = 0; i < lineObj.Line.Arcs[0].Dots.length; i++) {
+                linePntArr.push([lineObj.Line.Arcs[0].Dots[i].x, lineObj.Line.Arcs[0].Dots[i].y]);
+            }
+            for (var i = 0; i < regionObj.Rings[0].Arcs[0].Dots.length; i++) {
+                linPointArr.push([regionObj.Rings[0].Arcs[0].Dots[i].x, regionObj.Rings[0].Arcs[0].Dots[i].y]);
+            }
+            //创建要素1（线要素）
+            var feature1 = new ol.Feature({
+                geometry: new ol.geom.LineString(linePntArr)
+            });
+            //设置要素样式
+            feature1.setStyle(new ol.style.Style({
+                stroke: new ol.style.Stroke({
+                    color: 'rgba(41,57,85,1)',
+                    width: 3
+                })
+            }));
+            //创建要素2（区要素）
+            var feature2 = new ol.Feature({
+                geometry: new ol.geom.Polygon([linPointArr])
+            });
+            //设置要素样式
+            feature2.setStyle(new ol.style.Style({
+                fill: new ol.style.Fill({
+                    color: 'rgba(22,197,199,0.5)'
+                }),
+                stroke: new ol.style.Stroke({
+                    color: 'rgba(22,197,199,0.5)',
+                    width: 3
+                })
+            }));
+            //创建资源
+            var source = new ol.source.Vector({
+                features: [feature1, feature2],
+                warpX: false
+            });
+            var graphicLayer = new ol.layer.Vector({
+                source: source
+            });
+            map.addLayer(graphicLayer);
+        }
+
+        /*============================================拓扑分析===================================================*/
+        //执行拓扑分析
+        function topAnalysis() {
+            if ($("#topResult").val()) {
+                $("#topResult").val("");
+            }
+            //显示进度条
+            startPressBar();
+            //初始化TopAnalysis类
+            var topParam = new Zondy.Service.TopAnalysis({
+                ip: "develop.smaryun.com",
+                port: "6163"    //访问IGServer的端口号，.net版为6163，Java版为8089
+            });
+
+            //调用setPnt方法，设置点类型
+            topParam.setLine(lineObj);
+            //调用setRelativeObj方法，设置拓扑分析参照物
+            topParam.setRelativeObj(regionObj);
+            //设置拓扑分析半径
+            topParam.nearDis = "0.05";
+            //执行拓扑分析，成功执行后返回执行结果，onSuccess为回调函数
+            topParam.execute(AnalysisSuccess, AnalysisError);
+        }
+
+        //分析失败回调
+        function AnalysisError(e) {
+            //停止进度条
+            stopPressBar();
+        }
+
+        //分析成功后的回调
+        function AnalysisSuccess(data) {
+            //停止进度条
+            stopPressBar();
+            $("#topResult").val(data);
+        }
+
+        /*===========================================进度条===================================================*/
+        //停止进度条
+        function stopPressBar() {
+            document.getElementById('preview').style.display = "none";
+        }
+        //开始进度条动画
+        function startPressBar() {
+            document.getElementById('preview').style.display = "";
+        }
+    </script>
+</head>
+<body onload="init();">
+    <div id="preview" style="display: none; text-align: center; padding-top: 250px; font-weight: bold">
+        <img src="../src/images/huanchong.gif" alt='' /><br />
+        <br />
+        <span>正在进行拓扑分析，请稍候</span>
+    </div>
+    <div class="ToolLib">
+        <input type="button" id="topAnalysisBtn" class="ButtonLib" value="拓扑分析" onclick="topAnalysis()" />
+        分析结果：<input id="topResult" type="text" disabled="disabled" />
+    </div>
+    <!--地图显示-->
+    <div id="mapCon">
+    </div>
+
+
+    <p style="position:absolute;left:0px;bottom:0px;z-index:9999;color:crimson;font-style:initial">
+        相交
+        <a href="../../jihe/xiangjiao.html">
+            <img border="0" src="../src/images/相交.png" width="50" height="50" />
+        </a>
+    </p>
+
+    <p style="position:absolute;left:200px;bottom:0px;z-index:9999;color:crimson;font-style:initial">
+        相离
+        <a href="../../jihe/xiangli.html">
+            <img border="0" src="../src/images/相离.png" width="50" height="50" />
+        </a>
+    </p>
+
+    <p style="position:absolute;left:400px;bottom:0px;z-index:9999;color:crimson;font-style:initial">
+        包含
+        <a href="../../jihe/baohan.html">
+            <img border="0" src="../src/images/包含.png" width="50" height="50" />
+        </a>
+    </p>
+
+    <p style="position:absolute;left:600px;bottom:0px;z-index:9999;color:crimson;font-style:initial">
+        相邻
+        <a href="../../jihe/xianglin.html">
+            <img border="0" src="../src/images/相邻.png" width="50" height="50" />
+        </a>
+    </p>
+
+    <p style="position:absolute;right:10px;bottom:0px;z-index:99999;color:crimson;font-style:oblique">
+        返回上一级
+        <a href="../jihe.html">
+            <img border="0" src="../src/images/fanhui.png" width="50" height="50" />
+        </a>
+    </p>
+
+
+</body>
+</html>
