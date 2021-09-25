@@ -7,6 +7,23 @@
     <link href="../../css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link href="../../libs/ol5/ol.css" rel="stylesheet" type="text/css" />
     <script src="../../libs/ol5/MapGis_ol_product.js" type="text/javascript"></script>
+    <style type="text/css">
+        button {
+            width: 200px;
+            padding: 8px;
+            background-color: #428bca;
+            border-color: #357ebd;
+            color: #fff;
+            -moz-border-radius: 10px;
+            -webkit-border-radius: 10px;
+            border-radius: 10px; /* future proofing */
+            text-align: center;
+            vertical-align: middle;
+            border: 1px solid transparent;
+            font-weight: 900;
+            font-size: 100%
+        }
+    </style>
 </head>
 <body>
     <div class="ToolLib">
@@ -61,13 +78,13 @@
             //地图视图设置
             view: view
         });
-        //各定位点(中国省会城市)
-        var shenyang = ol.proj.fromLonLat([123.24, 41.50]);
-        var beijing = ol.proj.fromLonLat([116.28, 39.54]);
-        var shanghai = ol.proj.fromLonLat([121.29, 31.14]);
-        var wuhan = ol.proj.fromLonLat([114.21, 30.37]);
-        var guangzhou = ol.proj.fromLonLat([113.15, 23.08]);
-        var haikou = ol.proj.fromLonLat([110.20, 20.02]);
+        //各定位点(长征途径的城市)
+        var ruijin = ol.proj.fromLonLat([123.24, 41.50]);
+        var xiangjiang = ol.proj.fromLonLat([114.21, 30.37]);
+        var zunyi = ol.proj.fromLonLat([116.28, 39.54]);
+        var kunming = ol.proj.fromLonLat([121.29, 31.14]);
+        var daduhe = ol.proj.fromLonLat([113.15, 23.08]);
+        var yanan = ol.proj.fromLonLat([110.20, 20.02]);
         // 获取反弹值
         function bounce(t) {
             var s = 7.5625, p = 2.75, l;
@@ -101,15 +118,15 @@
                 {
                     //动画结束时的视图中心,即当前视图中心同目标视图中心连线的中心点
                     center: [
-                        center[0] + (shenyang[0] - shenyang[0]) / 2,
-                        center[1] + (shenyang[1] - shenyang[1]) / 2
+                        center[0] + (ruijin[0] - ruijin[0]) / 2,
+                        center[1] + (ruijin[1] - ruijin[1]) / 2
                     ],
                     rotation: Math.PI,//动画结束时的旋转角度，即180度
                     easing: ol.easing.easeIn//按每一帧动画控制的动画速度，即开始缓慢并逐渐加快速度
                 },
                 //第二个过程
                 {
-                    center: shenyang,//动画结束时的视图中心
+                    center: ruijin,//动画结束时的视图中心
                     rotation: 2 * Math.PI,//动画结束时的旋转角度，即360度回正
                     easing: ol.easing.easeOut//按每一帧动画控制的动画速度，即开始快速并逐渐减速
                 });
@@ -117,7 +134,7 @@
         //弹性伸缩效果定位
         document.getElementById('elastic').onclick = function () {
             view.animate({
-                center: beijing,///动画结束时的视图中心
+                center: zunyi,///动画结束时的视图中心
                 duration: 2000,//动画的持续时间（以毫秒为单位）
                 easing: elastic//按每一帧动画控制的动画持续时间函数
             });
@@ -125,7 +142,7 @@
         //反弹效果定位
         document.getElementById('bounce').onclick = function () {
             view.animate({
-                center: shanghai,///动画结束时的视图中心
+                center: kunming,///动画结束时的视图中心
                 duration: 2000,//动画的持续时间（以毫秒为单位）
                 easing: bounce//按每一帧动画控制的动画持续时间函数
             });
@@ -137,13 +154,13 @@
                 //第一个过程
                 {
                     rotation: rotation + Math.PI,//第一次动画旋转角度
-                    anchor: wuhan,//自旋的中心点，即武汉
+                    anchor: xiangjiang,//自旋的中心点，即武汉
                     easing: ol.easing.easeIn////按每一帧动画控制的动画速度，即开始缓慢并逐渐加快速度
                 },
                 //第二个过程
                 {
                     rotation: rotation + 2 * Math.PI,//动画结束时的旋转角度，即360度回正
-                    anchor: wuhan,// 旋转中心点
+                    anchor: xiangjiang,// 旋转中心点
                     easing: ol.easing.easeOut///按每一帧动画控制的动画速度，即开始快速并逐渐减速
                 });
         };
@@ -166,7 +183,7 @@
             }
             //第一个动画
             view.animate({
-                center: guangzhou,
+                center: daduhe,
                 duration: duration
             }, callback);
             //第二个动画
@@ -209,7 +226,7 @@
         };
 
         function tour() {
-            var locations = [shenyang, beijing, shanghai, wuhan, guangzhou, haikou];
+            var locations = [ruijin, zunyi, kunming, xiangjiang, daduhe, yanan];
             var index = -1;
 
             function next(more) {
