@@ -16,7 +16,7 @@
         var password = str.replace(" ", "");
         var conn = new ActiveXObject("ADODB.Connection");
         var rs = new ActiveXObject("ADODB.Recordset");
-        var connectionstring = "DSN=gis;Driver={MySQL ODBC 8.0 Driver};Server=localhost;Database=gis;User=root; Password=lxrlxr0602";
+        var connectionstring = "DSN=MapGIS;Driver={MySQL ODBC 8.0 Driver};Server=localhost;Database=sys;User=root; Password=";
         conn.open(connectionstring);
         var sql = "select Password from user where id=" + "'"+username+"'";
         rs.open(sql, conn);
