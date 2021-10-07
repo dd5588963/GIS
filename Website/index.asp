@@ -6,7 +6,7 @@
           content="width=device-width,
           initial-scale=1.0, minimum-scale=1.0,
           maximum-scale=1.0, user-scalable=no" />
-    <title>武汉市红旅党建地图系统</title>
+    <title>红旅寻踪地图系统</title>
     <meta name="renderer" content="webkit" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
@@ -21,7 +21,7 @@
     <style type="text/css">
         #mapCon {
             width: 100%;
-            height: 95%;
+            height: 100%;
             position: absolute;
             z-index: -1;
         }
@@ -131,10 +131,36 @@
             view: new ol.View({
                 center: [12730752, 3580052],
                 projection: 'EPSG:3857',
-                zoom: 11,
+                zoom: 6,
                 minZoom: 1
             }),
             target: 'mapCon',
+
+        //var layer1 = new ol.layer.Tile({
+        //    title: "天地图矢量图层",
+        //    source: new ol.source.XYZ({
+        //        url: "http://t0.tianditu.com/DataServer?T=vec_c&x={x}&y={y}&l={z}&tk=" + "b66ca40c27956bec0f3ce4dd2e94235b",//parent.TiandituKey()为天地图密钥,
+        //        projection: ol.proj.get('EPSG:4326'),
+        //        wrapX: false
+        //    })
+        //});
+        //var layer2 = new ol.layer.Tile({
+        //    title: "天地图矢量注记图层",
+        //    source: new ol.source.XYZ({
+        //        url: "http://t0.tianditu.com/DataServer?T=cva_c&x={x}&y={y}&l={z}&tk=" + "b66ca40c27956bec0f3ce4dd2e94235b",//parent.TiandituKey()为天地图密钥
+        //        projection: ol.proj.get('EPSG:4326')
+        //    })
+        //});
+        ////初始化地图容器
+        //map = new ol.Map({
+        //    target: 'mapCon',
+        //    layers: [layer1, layer2],
+        //    view: new ol.View({
+        //        center: [114, 30],
+        //        zoom: 7,
+        //        projection: "EPSG:4326",
+        //        crossOrigin: 'anonymous'
+        //    }),
             controls: ol.control.defaults().extend([
                 new ol.control.FullScreen(),
                 new ol.control.ScaleLine(),
@@ -175,7 +201,7 @@
 
         json = null; //json里面的数据
         //读取Json文件
-        var url = "../json/table/temp.json"/*json文件url，本地的就写本地的位置，如果是服务器的就写服务器的路径*/
+        var url = "../json/table/temp2.json"/*json文件url，本地的就写本地的位置，如果是服务器的就写服务器的路径*/
         var request = new XMLHttpRequest();
         request.open("get", url);/*设置请求方法与路径*/
         request.send(null);/*不发送数据到服务器*/
@@ -242,8 +268,8 @@
                     elem: '#dataTable'
                     , width: 600
                     , height: 300
-                    , url: '../json/table/temp.json'
-                    , title: '红色景点相关信息'
+                    , url: '../json/table/temp2.json'
+                    , title: '长征沿途主要城市'
                     , data: viewObj.tbData  //数据类
                     , page: false //开启分页
                     , limit: 10
@@ -480,7 +506,7 @@
                 elem: '#dataTable'
                 , width: 600
                 , height: 300
-                , title: '武汉市各级党组织信息'
+                , title: '长征沿途重要城市'
                 , page: { limit: newData.length } //开启分页
                 , toolbar: 'default' //开启工具栏，此处显示默认图标，可以自定义模板，详见文档
                 , totalRow: true //开启合计行
@@ -663,9 +689,9 @@
     <ul class="layui-nav" style="margin-top: -100px;z-index:9998">
         <li class="layui-nav-item layui-this"><a href="">首页</a></li>
         <li class="layui-nav-item">
-            <a href="xinwen.html">新闻</a>
+            <a href="xinwen.html">长征故事</a>
         </li>
-        <li class="layui-nav-item"><a href="javascript:;">数据</a>
+        <li class="layui-nav-item"><a href="javascript:;">日新月异</a>
             <dl class="layui-nav-child" style="z-index:9999">
                 <dd><a href="earth.html">大国外交</a></dd>
                 <dd><a href="jingji.html">经济建设</a></dd>
@@ -673,19 +699,20 @@
             </dl>
         </li>
         <li class="layui-nav-item">
-            <a href="javascript:;">长征</a>
+            <a href="javascript:;">漫漫长征</a>
             <dl class="layui-nav-child">
-                <dd><a href="changzheng.html">长征动画</a></dd>
+                <dd><a href="donghua.html">长征动画</a></dd>
                 <dd><a href="shijianzhou.html">长征时间轴</a></dd>
                 <dd><a href="junbiao.html">长征军标绘制</a></dd>
             </dl>
         </li>
         <li class="layui-nav-item">
-            <a href="javascript:;">地图分析</a>
+            <a href="javascript:;">长征区位因素分析（开发中）</a>
             <dl class="layui-nav-child">
                 <dd><a href="jihe.html">几何分析</a></dd>
                 <dd><a href="kongjian.html">空间分析</a></dd>
                 <dd><a href="wangluo.html">网络分析</a></dd>
+                <dd><a href="requ.html">地图热区</a></dd>
             </dl>
         </li>
         <li class="layui-nav-item"><a href="bangzhu.html">帮助</a></li>
@@ -694,7 +721,7 @@
 
     <ul class="layui-nav layui-nav-tree layui-inline" lay-filter="demo" style="margin-right: 0px;z-index:9997">
         <li class="layui-nav-item ">
-            <a href="javascript:;">基础功能</a>
+            <a href="javascript:;">长征重要位置标注</a>
             <dl class="layui-nav-child">
                 <dd><a href="javascript:addpoint();">添加点</a></dd>
                 <dd><a href="javascript:addLine();">添加线</a></dd>
@@ -710,25 +737,15 @@
             </dl>
         </li>
         <li class="layui-nav-item">
-            <a href="javascript:;">高级功能</a>
-            <dl class="layui-nav-child">
-                <dd><a href="ceju.html">地图测距</a></dd>
-                <dd><a href="donghua.html">地图动画</a></dd>
-                <dd><a href="requ.html">地图热区</a></dd>
-            </dl>
+            <a href="ceju.html">长征测量</a>
+            
         </li>
         <li class="layui-nav-item"><a href="javascript:export_map()">地图导出</a></li>
         <li class="layui-nav-item"><a href="dizhi.html">要素查询</a></li>
     </ul>
 
-    <h3 style="font:400px;color:red;position:absolute;bottom:10px;left:100px">友情链接:</h3>
-    <a href="http://www.12371.cn/" style="color:red;position:absolute;bottom:10px;left:300px">中国共产党员网</a>
-    <a href="http://cpc.people.com.cn/" style="color:red;position:absolute;bottom:10px;left:500px">中国共产党新闻网</a>
-    <a href="http://paper.people.com.cn/rmrb/paperindex.htm" style="font:400px;color:red;position:absolute;bottom:10px;left:700px">人民网</a>
-    <a href="http://www.zgdsw.com/" style="color:red;position:absolute;bottom:10px;left:900px">中国党史网</a>
-    <a href="http://www.youth.cn/" style="color:red;position:absolute;bottom:10px;left:1100px">中国青年网</a>
-    <a href="http://www.gov.cn/" style="color:red;position:absolute;bottom:10px;left:1300px">中国政府网</a>
-    <!--<a href="http://www.china.com.cn/" style="color:red;position:absolute;bottom:10px;left:1500px">中国网</a>-->
+   
+    
 
 
     <script src="//res.layui.com/layui/dist/layui.js" charset="utf-8"></script>

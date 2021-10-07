@@ -279,5 +279,11 @@ li.addMove span.location-num{
 .location-shop-con {
     width: 325px;
 }
-
+.BMap_cpyCtrl {
+            display: none;
+        }
+ 
+.anchorBL {
+            display: none;
+        }
 

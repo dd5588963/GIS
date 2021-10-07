@@ -29,8 +29,8 @@
     <div class="ToolLib">
         <button class="ButtonLib" id="spin">旋转定位到瑞金</button>
         <button class="ButtonLib" id="elastic">弹性定位到遵义</button>
-        <button class="ButtonLib" id="bounce">反弹定位到上海</button>
-        <button class="ButtonLib" id="rotate">围绕武汉旋转</button>
+        <button class="ButtonLib" id="bounce">反弹定位到金沙江</button>
+        <button class="ButtonLib" id="rotate">围绕大渡河旋转</button>
         <button class="ButtonLib" id="fly">飞行定位到泸定桥</button>
         <button class="ButtonLib" id="tour">漫漫长征旅途</button>
     </div>
@@ -50,7 +50,7 @@
             //地图初始中心点
             center: [12950000, 4860000],
             //地图初始显示级别
-            zoom: 11
+            zoom: 6
         });
         //实例化Map对象加载地图
         var map = new ol.Map({
@@ -84,7 +84,7 @@
         var zunyi = ol.proj.fromLonLat([106.933296, 27.730631]);
         var jinshajiang = ol.proj.fromLonLat([101.879873, 25.709333]);
         var daduhe = ol.proj.fromLonLat([102.290934, 29.2802]);
-        var yanan = ol.proj.fromLonLat([109.501762,36.656091]);
+        var yanan = ol.proj.fromLonLat([109.501762, 36.656091]);
         // 获取反弹值
         function bounce(t) {
             var s = 7.5625, p = 2.75, l;

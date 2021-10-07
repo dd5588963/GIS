@@ -104,7 +104,7 @@
             view: new ol.View({
                 center: [12730752, 3580052],
                 projection: 'EPSG:3857',
-                zoom: 11,
+                zoom: 6,
                 minZoom: 1
             }),
             controls: ol.control.defaults().extend([
@@ -379,7 +379,7 @@
     <script>
         json = null; //json里面的数据
         //读取Json文件
-        var url = "../json/table/temp.json"/*json文件url，本地的就写本地的位置，如果是服务器的就写服务器的路径*/
+        var url = "../json/table/temp2.json"/*json文件url，本地的就写本地的位置，如果是服务器的就写服务器的路径*/
         var request = new XMLHttpRequest();
         request.open("get", url);/*设置请求方法与路径*/
         request.send(null);/*不发送数据到服务器*/
