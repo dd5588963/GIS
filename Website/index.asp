@@ -741,7 +741,7 @@
             
         </li>
         <li class="layui-nav-item"><a href="javascript:export_map()">地图导出</a></li>
-        <li class="layui-nav-item"><a href="dizhi.html">要素查询</a></li>
+        <li class="layui-nav-item"><a href="dizhi.html">红旅查询</a></li>
     </ul>
 
    
